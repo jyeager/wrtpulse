@@ -1,27 +1,28 @@
 # wrtpulse
 
-OpenWRT network monitoring dashboard and alerting tool.
+OpenWRT network monitoring dashboard and alerting web application.
 
 > **Status:** Early planning & scaffolding phase. Features, collection architecture, and implementation details are being defined iteratively via [PRDs](docs/prd/README.md).
 
 ## Overview
 
-`wrtpulse` aims to provide a lightweight, self-hosted monitoring dashboard and alerting service tailored for OpenWRT routers—designed to ship as a single Go binary with an embedded React/TypeScript web UI and ready-to-run Docker images.
+`wrtpulse` is a lightweight, self-hosted monitoring website and alerting service for OpenWRT routers. It is designed to run in a **single Docker container on Linux**, serving a React/TypeScript web dashboard from a Go backend with a mounted host volume for configuration and persistent data.
 
 ## Planned Tech Stack
 
-- **Backend:** Go (single lightweight binary, embedded frontend assets)
-- **Frontend:** React + TypeScript
-- **Packaging:** Docker / single static binary
+- **Deployment:** Single Docker container on Linux (Docker / Docker Compose, mounted volume for data & config)
+- **Backend:** Go (HTTP server serving the web UI, REST/WebSocket API, OpenWRT collector, storage, and alerting engine)
+- **Frontend:** React + TypeScript web dashboard
 
 ## Repository Structure
 
 ```text
 wrtpulse/
-├── cmd/wrtpulse/       # Go application entrypoint
+├── AGENTS.md           # Instructions & guardrails for AI coding agents
+├── cmd/wrtpulse/       # Go web server entrypoint
 ├── internal/           # Private Go packages (collectors, storage, alerting, API, config)
-├── web/                # React + TypeScript frontend
-├── deploy/             # Docker, Docker Compose, and deployment manifests
+├── web/                # React + TypeScript web dashboard
+├── deploy/             # Dockerfile, docker-compose.yml, and Linux deployment configs
 ├── docs/
 │   ├── architecture.md # High-level living architecture plan
 │   └── prd/            # Product Requirements Documents (PRDs)
